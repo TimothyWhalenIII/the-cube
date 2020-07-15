@@ -1,3 +1,8 @@
+function $(selector, container) {
+    return (container || document).querySelector(selector);
+}
+
+
 (function() {
 
 var _ = self.Life = function(seed) {
@@ -62,12 +67,16 @@ function cloneArray(array) {
 var _ = self.LifeView = function (table, size) {
     this.grid = table;
     this.size = size;
+    this.started = false;
+    this.autoplay = false;
 
     this.createGrid();
 };
 
 _.prototype = {
     createGrid: function () {
+        var me = this;
+
         var fragment = document.createDocumentFragment();
         this.grid.InnerHTML = "";
         this.checkboxes = [];
@@ -89,6 +98,13 @@ _.prototype = {
             fragment.appendChild(row);
 
         }
+        
+        this.grid.addEventListener("change", function(evt) {
+            if (evt.target.nodeName.toLowerCase() == "input"){
+                me.started = false;
+            }
+
+        })
 
         this.grid.appendChild(fragment);
     },
@@ -103,21 +119,55 @@ _.prototype = {
 
     play: function () {
         this.game = new Life(this.boardArray);
+        this.started = true;
     },
 
     next: function () {
+        var me = this;
+        if (!this.started || this.game) {
+            this.play();
+        }
+        
         this.game.next();
 
-        var board = this.board;
+        var board = this.game.board;
 
         for (var y=0; y<this.size; y++) {
             for (var x=0; x<this.size; x++) {
                 this.checkboxes[y][x].checked = !!board[y][x];
             }
         }
+
+        if (this.autoplay) {
+            this.timer = setTimeout(function () {
+                me.next();
+            }, 1000);
+        }
     }
 };
 
 })();
 
-var lifeview = new LifeView(document.getElementById("grid"), 12);
+var lifeView = new LifeView(document.getElementById("grid"), 12);
+
+(function() {
+
+var buttons = {
+    next: $("button.next")
+};
+
+buttons.next.addEventListener("click", function() {
+    lifeView.next();
+});
+
+$("#autoplay").addEventListener("change", function() {
+    buttons.next.textContent = this.checked? "Start" : "Next";
+
+    lifeView.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView.timer);
+    }
+});
+
+})();
