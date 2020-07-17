@@ -4,34 +4,81 @@
 }
 
 body {
-    text-align: center;
     font-family: sans-serif;
+    text-align: center;
 }
-
 h1 {
     margin-bottom: .5em 0 1em;
 }
-#grid {
+#autoplay, #grid, #grid1, #grid2, #grid3, #grid4, #grid5 {
     border-spacing: 0;
     margin: auto;
     border-collapse: collapse;
 }
 
-#grid td {
+td {
     border: 1px solid gray;
 }
 
-    #grid input[type="checkbox"] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        display: block;
-        width: 20px;
-        height: 20px;
-        border: 0;
-        background: white;
-    }
-        #grid input[type="checkbox"]:checked {
-            background: black;
-            box-shadow: 0 0 0 99px black inset;
-        }
+#grid td {
+    border: 1px solid red;
+}
+
+#grid1 td {
+    border: 1px solid orange;
+}
+
+#grid2 td {
+    border: 1px solid yellow;
+}
+
+#grid3 td {
+    border: 1px solid green;
+}
+
+#grid4 td {
+    border: 1px solid blue;
+}
+
+#grid5 td {
+    border: 1px solid indigo;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background: white; 
+}
+input[type="checkbox"]:checked {
+    background: black;
+    box-shadow: 0 0 0 1px black inset;
+}
+
+#grid {
+    transform: matrix(1, .5, -1, .5, -315, 63);
+}
+
+#grid1 {
+    transform: matrix(1, .5, 0, 1, -442, 0);
+}
+
+#grid2 {
+    transform: matrix(1, -.5, 0, 1, -189, -253);
+}
+
+#grid3 {
+    transform: matrix(1, .5, -1, .5, 315, -443);
+}
+
+#grid4 {
+    transform: matrix(1, .5, 0, 1, 441, -886);
+}
+
+#grid5 {
+    transform: matrix(1, -.5, 0, 1, 188, -1139);
+}

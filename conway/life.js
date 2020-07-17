@@ -141,15 +141,19 @@ _.prototype = {
         if (this.autoplay) {
             this.timer = setTimeout(function () {
                 me.next();
-            }, 1000);
+            }, 500);
         }
     }
 };
 
 })();
-
+//chooses size of grid and puts it on screen
 var lifeView = new LifeView(document.getElementById("grid"), 12);
-
+var lifeView1 = new LifeView(document.getElementById("grid1"), 12);
+var lifeView2 = new LifeView(document.getElementById("grid2"), 12);
+var lifeView3 = new LifeView(document.getElementById("grid3"), 12);
+var lifeView4 = new LifeView(document.getElementById("grid4"), 12);
+var lifeView5 = new LifeView(document.getElementById("grid5"), 12);
 (function() {
 
 var buttons = {
@@ -158,6 +162,11 @@ var buttons = {
 
 buttons.next.addEventListener("click", function() {
     lifeView.next();
+    lifeView1.next();
+    lifeView2.next();
+    lifeView3.next();
+    lifeView4.next();
+    lifeView5.next();
 });
 
 $("#autoplay").addEventListener("change", function() {
@@ -167,6 +176,31 @@ $("#autoplay").addEventListener("change", function() {
 
     if (!this.checked) {
         clearTimeout(lifeView.timer);
+    }
+    lifeView1.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView1.timer);
+    }
+    lifeView2.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView2.timer);
+    }
+    lifeView3.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView3.timer);
+    }
+    lifeView4.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView4.timer);
+    }
+    lifeView5.autoplay = this.checked;
+
+    if (!this.checked) {
+        clearTimeout(lifeView5.timer);
     }
 });
 
